@@ -1,0 +1,12 @@
+package com.SpringBoot.crud.UserCrud.Repo;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Component;
+
+import com.SpringBoot.crud.UserCrud.entity.Employees;
+
+@Component
+public interface EmpRepo extends CrudRepository<Employees, Integer> {
+	
+	Employees findById(int id);
+}
