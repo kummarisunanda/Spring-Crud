@@ -1,0 +1,50 @@
+package com.SpringBoot.crud.UserCrud.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.SpringBoot.crud.UserCrud.Repo.EmpRepo;
+import com.SpringBoot.crud.UserCrud.entity.Employees;
+
+@Component
+public class EmpService {
+	@Autowired
+	EmpRepo eRepo;
+
+	public List<Employees> getAll() {
+		// TODO Auto-generated method stub
+	 List<Employees> eList=(List<Employees>) eRepo.findAll();
+	 return eList;
+	}
+
+	public Employees getId(int id) {
+		// TODO Auto-generated method stub
+		Employees e= eRepo.findById(id);
+		return e;
+		
+	}
+
+	public String insertEmployee(Employees e) {
+		// TODO Auto-generated method stub
+		eRepo.save(e);
+		return "Success";
+		
+	}
+
+	public String updateEmp(int id, Employees e) {
+		// TODO Auto-generated method stub
+		Employees e1=eRepo.findById(id);
+		e1.setSalary(e.getSalary());
+		eRepo.save(e1);
+		return "Success";
+	}
+
+	public String deleteOne(int id) {
+		// TODO Auto-generated method stub
+		eRepo.delete(getId(id));
+		return "Success";
+	}
+	
+}
