@@ -1,0 +1,44 @@
+package com.SpringBoot.crud.UserCrud.Controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.SpringBoot.crud.UserCrud.entity.Employees;
+import com.SpringBoot.crud.UserCrud.service.EmpService;
+
+@RestController
+public class EmpController 
+{
+	@Autowired
+	EmpService eService;
+	@GetMapping("/getAllEmps")
+	public List<Employees> getAllEmp() {
+		return eService.getAll();
+	}
+	@GetMapping("/getOne/{empId}")
+	public Employees getOnId(@PathVariable("empId") int id) {
+		return eService.getId(id);
+	}
+	@PostMapping("/insertEmp")
+	public String insertEmps(@RequestBody Employees e) {
+		return eService.insertEmployee(e);
+		
+	}
+	@PutMapping("/update/{empId}")
+	public String update(@PathVariable("empId") int id,@RequestBody Employees e) {
+		return eService.updateEmp(id,e);
+	}
+	@DeleteMapping("/delete/{empId}")
+	public String delete(@PathVariable("empId") int id) {
+		return eService.deleteOne(id);
+	}
+	
+}
